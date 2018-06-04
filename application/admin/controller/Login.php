@@ -57,6 +57,6 @@ class Login extends Base
     //退出登录
     public function logout()
     {
-        session();
+        //消除session值
     }
 }
