@@ -1,0 +1,116 @@
+/**
+     * 四海通资质信息补充
+     * User:
+     * Date:
+     * Time:
+     *
+     *  *
+     */
+    public function shop_child_merchants()
+    {
+        //参数过滤
+        $this->request->filter('strip_tags','trim');
+        //接受参数
+        $info = $this->request->param();
+        //看是否需加密
+        $returncolla = !empty($shop_info['returncolla']) ? $shop_info['returncolla'] : 0;
+        //自动验证
+        $validate = \think\Loader::validate('childMerchants');
+        if (!$validate->batch()->check($shop_info)) {
+            $error = $validate->getError();
+            $error_msg = array_values($error);
+            puterror(['status' => 0, 'msg' => $error_msg[0]],$returncolla);
+        }
+        $customer_type = $info['customer_type'];
+        if(empty($customer_type)) {
+            puterror(['status' => 0, 'msg' => '请先选择商户类型'],$returncolla);
+        }
+        switch($customer_type) {
+            case 1 :
+
+                break;
+            case 2 :
+
+                break;
+            case 3 :
+
+                break;
+        }
+
+
+
+    }
+
+
+
+        /**
+     * 查询营业执照
+     * User:
+     * Date:
+     * Time:
+     *  *
+     */
+    public function getPicOss()
+    {
+        $info = info();
+        $returncolla = !empty($info['returncolla']) ? $info['returncolla'] : 0;
+        if(empty($info['user_id']) || empty($info['shop_id'])) {
+            puterror(1,$returncolla);
+        }
+        $shop = new model\Shop();
+        $shop_info = $shop->field('pic_oss,shop_id,user_id')->where('shop_id','eq',$info['shop_id'])->find();
+        if($shop_info == false) {
+            $data = ['status'=>0,'msg'=>'请先上传营业执照'];
+            putsuccess($data,$returncolla);
+        }
+        $data['msg'] = 'success';
+        $data['list']['user_id'] = $shop_info['user_id'];
+        $data['list']['shop_id'] = $shop_info['shop_id'];
+        $data['list']['pic_oss'] = $shop_info['pic_oss'];
+        putsuccess($data,$returncolla);
+    }
+
+
+
+
+
+  
+
+  company_name,three_cert_flag,business_license_no,business_license_validity,organization_code,business_license_photocopy_oss,organization_code_photocopy_oss,tax_registry_photocopy_oss,bank_account_licence_photocopy_oss
+ 
+
+
+
+
+  partner_user_id,identity_id,customer_type,name,id_card,id_card_validity,provincecity,area,address,phone_num,company_or_person,bank_card_no,bank_account_name,bank_name,bank_prov,bank_city,bank_branch_name,bank_line_no,id_card_front_oss,id_card_back_oss,bank_card_photo_oss,holding_id_card_front_photo_oss,holding_bank_card_photo_oss,shop_photo_oss,contract_or_certificate_oss,qualification_pic_oss,company_property_id,audit_status,
+
+
+
+        $data['list']['card']['id_card_front_oss']    = $shop_type['id_card_front_oss'];
+        $data['list']['card']['id_card_back_oss']     = $shop_type['id_card_back_oss'];
+        $data['list']['card']['holding_id_card_front_photo_oss']     = $shop_type['holding_id_card_front_photo_oss'];
+
+        $data['list']['back']['name']    = $shop_type['name'];
+        $data['list']['back']['bank_prov']    = $shop_type['bank_prov'];
+        $data['list']['back']['bank_city']    = $shop_type['bank_city'];
+        $data['list']['back']['bank_branch_name']    = $shop_type['bank_branch_name'];
+        $data['list']['back']['customer_type']    = $shop_type['customer_type'];
+        $data['list']['back']['company_or_person']    = $shop_type['company_or_person'];
+        $data['list']['back']['bank_card_no']    = $shop_type['bank_card_no'];
+        $data['list']['back']['bank_account_name']    = $shop_type['bank_account_name'];
+        $data['list']['back']['company_name']    = $three_card['company_name'];
+        $data['list']['back']['three_cert_flag']    = $three_card['three_cert_flag'];
+        $data['list']['back']['business_license_no']    = $three_card['business_license_no'];
+        $data['list']['back']['business_license_validity']    = $three_card['business_license_validity'];
+        $data['list']['back']['organization_code']    = $three_card['organization_code'];
+        $data['list']['back']['tax_registry_no']    = $three_card['tax_registry_no'];
+        $data['list']['back']['holding_bank_card_photo_oss'] = $shop_type['holding_bank_card_photo_oss'];
+        $data['list']['back']['bank_card_photo_oss']    = $shop_type['bank_card_photo_oss'];
+
+        $data['list']['license']['shop_photo_oss']    = $shop_type['shop_photo_oss'];
+        $data['list']['license']['contract_or_certificate_oss']    = $shop_type['contract_or_certificate_oss'];
+        $data['list']['license']['qualification_pic_oss']    = $shop_type['qualification_pic_oss'];
+        $data['list']['license']['business_license_photocopy_oss']    = $three_card['business_license_photocopy_oss'];
+        $data['list']['license']['organization_code_photocopy_oss']    = $three_card['organization_code_photocopy_oss'];
+        $data['list']['license']['tax_registry_photocopy_oss']    = $three_card['tax_registry_photocopy_oss'];
+        $data['list']['license']['bank_account_licence_photocopy_oss'] = $three_card['bank_account_licence_photocopy_oss'];

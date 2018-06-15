@@ -12,6 +12,11 @@ class Index extends Base
 {
     public function index()
     {
-        return '首页--admin/index/index';
+        return $this->fetch();
+    }
+
+    public function test()
+    {
+        return $this->fetch();
     }
 }

@@ -15,6 +15,12 @@ Route::get('think', function () {
 
 Route::get('hello/:name', 'index/hello');
 
+Route::get('login','admin/login/index');
+
+Route::post('dologin','admin/login/dologin');
+
+Route::get('index','admin/index/index')->middleware(app\http\middleware\Check::class);
+
 return [
 
 ];
