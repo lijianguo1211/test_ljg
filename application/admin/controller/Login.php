@@ -58,5 +58,10 @@ class Login extends Base
     public function logout()
     {
         //消除session值
+        //Session::clear('think');
+        //Session::delete('admin_id','think');
+       // Session::clear();
+        session('admin_id',null);
+        $this->success("退出成功",url('admin/login/index'));
     }
 }
